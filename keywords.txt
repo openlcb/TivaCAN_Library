@@ -1,0 +1,9 @@
+CAN	KEYWORD1
+
+begin	KEYWORD2
+end	KEYWORD2
+available	KEYWORD2
+write	KEYWORD2
+read	KEYWORD2
+
+CAN_message_t	KEYWORD1
