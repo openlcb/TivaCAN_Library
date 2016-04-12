@@ -26,7 +26,7 @@ typedef struct CAN_message_t
 } CAN_message_t;
 
 /// CAN module class.
-class CAN
+class CANClass
 {
 private:
   struct RingBuffer
@@ -34,18 +34,24 @@ private:
     static const uint8_t SIZE = 8;
     CAN_message_t Buf[SIZE];
     uint8_t Count;
-    uint8_t RDIndex;
-    uint8_t WRIndex;
+    uint8_t RdIndex;
+    uint8_t WrIndex;
   };
 
-  RingBuffer TXBuffer;
-  RingBuffer RXBuffer;
+  RingBuffer TxBuffer;
+  RingBuffer RxBuffer;
+
+  uint32_t Base;
+  uint32_t Interrupt;
+  uint32_t Baud;
+  bool TxPending;
+  uint8_t Data[8];
 
 public:
   /// Constructor.
   /// @param module CAN module instance on device (0 or 1)
   /// @param baud CAN module baud rate
-  CAN(uint8_t module, uint32_t baud = 125000);
+  CANClass(uint8_t module, uint32_t baud = 125000);
 
   /// Initiailize and enable CAN module.
   void begin();
@@ -67,6 +73,10 @@ public:
   /// @param count number of CAN messages to read
   /// @return number of CAN messages read
   int read(CAN_message_t msg[], size_t count = 1);
+
+  void CANIntHandler();
 };
+
+extern CANClass CAN;
 
 #endif
