@@ -2,6 +2,7 @@
 CAN library for the TI Tiva series of processors.   
 
 API:
+
   CANClass(uint8_t module, uint32_t baud = 125000);   Constructor. 'module' chooses CAN module instance on device (0 or 1); 'baud' sets the CAN module baud rate, defaults to 125kbps.  
 
   void begin();   Initiailize and enable CAN modules.
